@@ -1,0 +1,49 @@
+---
+title: "emmatest"
+author: "Emma Nguyen"
+date: "2026-10-08"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readr)
+library(dplyr)
+library(tidyverse)
+```
+
+**Upload Raw Data**
+
+```{r}
+
+bg <- as.data.frame(read_csv("data/background-clean.csv"))
+class <- as.data.frame(read_csv("data/class-summary.csv"))
+interest <- as.data.frame(read_csv("data/interest-clean.csv"))
+response_time <- as.data.frame(read_csv("data/response-timing.csv"))
+meta_data <- as.data.frame(read_csv("data/survey-metadata.csv"))
+
+head(bg)
+
+```
+
+**EDA**
+
+```{r}
+
+# prof (char) vs comf (double)
+
+prof_x_comf <- bg |>
+  group_by(prog.prof) |>
+  summarise(
+    mean = mean(prog.comf),
+    median = median(prog.comf),
+    count = n()) |>
+  ungroup()
+
+prof_x_comf
+
+# hello
+
+
+
+```
