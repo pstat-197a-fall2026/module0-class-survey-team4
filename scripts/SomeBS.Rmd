@@ -1,0 +1,42 @@
+---
+title: "SomeBS"
+output: html_document
+---
+
+```{r, echo=FALSE, eval = FALSE}
+install.packages('tidyverse')
+install.packages('DBI')
+install.packages('RSQLite')
+```
+
+
+```{r}
+library(DBI)
+library(RSQLite)
+library(dplyr)
+drv = dbDriver("SQLite")
+```
+
+
+```{r}
+backgroundClean <- read_csv('../data/background-clean.csv', show_col_types = FALSE)
+classSummary <- read_csv('../data/class-summary.csv', show_col_types = FALSE)
+interestClean <- read_csv('../data/interest-clean.csv', show_col_types = FALSE)
+responseTiming <- read_csv('../data/response-timing.csv', show_col_types = FALSE)
+surveyMetadata <- read_csv('../data/survey-metadata.csv', show_col_types = FALSE)
+```
+
+```{r}
+interestClean
+backgroundClean
+```
+
+```{r}
+bigDataGang <- inner_join(backgroundClean, interestClean, by = "response_id")
+bigDataGang
+```
+
+```{r}
+write.csv(bigDataGang, file = "../data/bigDataGang.csv", row.names = FALSE)
+```
+
