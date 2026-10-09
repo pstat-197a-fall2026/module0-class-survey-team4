@@ -32,7 +32,8 @@ head(bg)
 
 # prof (char) vs comf (double)
 
-prof_x_comf <- bg |>
+# programming 
+prog <- bg |>
   group_by(prog.prof) |>
   summarise(
     mean = mean(prog.comf),
@@ -40,10 +41,46 @@ prof_x_comf <- bg |>
     count = n()) |>
   ungroup()
 
-prof_x_comf
+prog
 
-# hello
+# math 
 
+math <- bg |>
+  group_by(math.prof) |>
+  summarise(
+    mean = mean(math.comf),
+    median = median(math.comf),
+    count = n()) |>
+  ungroup()
 
+math 
+# stats 
+
+stats <- bg |>
+  group_by(stat.prof) |>
+  summarise(
+    mean = mean(stat.comf),
+    median = median(stat.comf),
+    count = n()) |>
+  ungroup()
+
+stats
+
+combined <- bg |>
+  pivot_longer(
+    cols = c(prog.prof, math.prof, stat.prof,
+             prog.comf, math.comf, stat.comf),
+    names_to = c("subject", ".value"),
+    names_pattern = "(prog|math|stat)\\.(prof|comf)"
+  ) |>
+  group_by(subject, prof) |>
+  summarise(
+    mean = mean(comf, na.rm = TRUE),
+    median = median(comf, na.rm = TRUE),
+    count = n(),
+    .groups = "drop"
+  )
+
+combined
 
 ```
