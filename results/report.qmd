@@ -17,7 +17,6 @@ execute:
 Use this as a template. Keep the headers and remove all other text. Overall, your report may be quite short. When it is complete, render and then push changes to your team repository.
 
 ```{r}
-# load any other packages and read data here
 library(tidyverse)
 ```
 
@@ -25,13 +24,25 @@ library(tidyverse)
 
 Write a one-paragraph abstract summarizing what you did and your findings. It need not be comprehensive; try to highlight the most important or interesting outcomes.
 
+(Overall goal: explore how proficiency and comfort level in programming/math/stats are associated with other factors and each other)
+
+question 1: Is prior research experience associated with students’ confidence in math, statistics, and programming?
+
+question 2: is proficiency and comfortability in programming, math, statistics correlated
+
+Question 3: script/eda for question 3, writing report for question 3 with visuals, etc
+
 ## Data description
 
 Write a brief description of the dataset. Your description should cover how data were obtained, sample characteristics, and measurements taken. It does not need to be exhaustive, but sufficiently detailed to convey a clear high-level understanding of the dataset. You can utilize bullet points or tables if you feel it would help improve clarity.
 
-The data was collected from a survey given to all students enrolled in PSTAT197A fall 2026. There are a total of 55 responses with no random selection. Demographic information about the respondents is presented as an aggregate summary. Information about skills, experience, and project preferences was recorded anonomously on an opt-in basis. 51 of the respondents consented to share skills and experience and 49 of the respondents consented to share project preferences.
+The data was collected from a survey given to all students enrolled in PSTAT197A fall 2026. There are a total of 55 responses with no random selection. Demographic information about the respondents is presented as an aggregate summary. Information about skills, experience, and project preferences was recorded anonymously on an opt-in basis. 51 of the respondents consented to share skills and experience and 49 of the respondents consented to share project preferences.
 
 (describe some of measurements/variables used for questions of interest)
+
+(confidence and proficiency as ordinal variables, research as categorical)
+
+(classes taken as a list)
 
 ## Questions of interest
 
@@ -47,9 +58,21 @@ For example:
 
 Notice that the questions are precise but not overly technical.
 
+question 1: Is prior research experience associated with students’ confidence in math, statistics, and programming?
+
+question 2: is proficiency and comfortability in programming, math, statistics correlated
+
+Question 3: script/eda for question 3, writing report for question 3 with visuals, etc
+
 ## Findings
 
 Summarize your results. Don't try to explain every step you took; focus instead on providing the main data analytic outputs -- tables and figures -- and explaining clearly what they show. Clarify any important decisions you made in obtaining them. You can display codes if you like but it is not necessary.
+
+### Question 1
+
+### Question 2
+
+### Question 3
 
 ## Useful tips (remove this section)
 
