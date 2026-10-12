@@ -1,30 +1,92 @@
 ---
-title: "Proficiency vs Comfortability
+title: "emmatest"
 author: "Emma Nguyen"
-date: "2026-10-12"
+date: "2026-10-08"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(readr)
+library(dplyr)
+library(tidyverse)
 ```
 
-## R Markdown
+**Upload Raw Data**
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+```{r}
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+bg <- as.data.frame(read_csv("data/background-clean.csv"))
+class <- as.data.frame(read_csv("data/class-summary.csv"))
+interest <- as.data.frame(read_csv("data/interest-clean.csv"))
+response_time <- as.data.frame(read_csv("data/response-timing.csv"))
+meta_data <- as.data.frame(read_csv("data/survey-metadata.csv"))
 
-```{r cars}
-summary(cars)
+head(bg)
+
 ```
 
-## Including Plots
+**EDA**
 
-You can also embed plots, for example:
+```{r}
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+# prof (char) vs comf (double)
+
+# programming 
+prog <- bg |>
+  group_by(prog.prof) |>
+  summarise(
+    mean = mean(prog.comf),
+    median = median(prog.comf),
+    count = n()) |>
+  ungroup()
+
+prog
+
+# math 
+
+math <- bg |>
+  group_by(math.prof) |>
+  summarise(
+    mean = mean(math.comf),
+    median = median(math.comf),
+    count = n()) |>
+  ungroup()
+
+math 
+# stats 
+
+stats <- bg |>
+  group_by(stat.prof) |>
+  summarise(
+    mean = mean(stat.comf),
+    median = median(stat.comf),
+    count = n()) |>
+  ungroup()
+
+stats
+
+combined <- bg |>
+  pivot_longer(
+    cols = c(prog.prof, math.prof, stat.prof,
+             prog.comf, math.comf, stat.comf),
+    names_to = c("subject", ".value"),
+    names_pattern = "(prog|math|stat)\\.(prof|comf)"
+  ) |>
+  group_by(subject, prof) |>
+  summarise(
+    mean = mean(comf, na.rm = TRUE),
+    median = median(comf, na.rm = TRUE),
+    count = n(),
+    .groups = "drop"
+  )
+
+combined
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+*Inferences:*
+
+- In every subject, students who rate themselves more proficient also report higher comfort. Advanced students average about 4.3-4.4 out of 5, intermediate students about 3.5-3.7.
+- Only 3 students call themselves programming beginners, and nobody is a beginner in math or stats. The class sees itself as intermediate-to-advanced, especially in stats (33 of 51 advanced).
+- Programming has the lowest comfort among intermediates (median 3 vs. 4 in math and stats), so programming is where students feel least sure of themselves.
