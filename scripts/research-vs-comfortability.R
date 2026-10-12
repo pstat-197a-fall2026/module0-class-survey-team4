@@ -17,7 +17,7 @@ ggplot(background, aes(x=research, y =math.comf))+ geom_boxplot() + labs(title =
        x="Research Experience", 
        y = "Math Confidence")
 
-## Second Graph (Math)
+## Second Graph (Statistics)
 ggplot(background, aes(x=research, y = stat.comf)) + geom_boxplot() + 
   labs(title="Statistics Confidence by Research Experience", 
        x="Research Experience",
@@ -36,6 +36,7 @@ ggplot(background, aes(x=research, y = prog.comf)) + geom_boxplot() +
 background %>%
   group_by(research) %>%
   summarize(
+    n=n(),
     mean_math = mean(math.comf, na.rm = TRUE),
     mean_stat = mean(stat.comf, na.rm = TRUE),
     mean_prog = mean(prog.comf, na.rm = TRUE)
