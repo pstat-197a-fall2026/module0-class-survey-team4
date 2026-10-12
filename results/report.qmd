@@ -18,6 +18,7 @@ Use this as a template. Keep the headers and remove all other text. Overall, you
 
 ```{r}
 library(tidyverse)
+library(rstatix)
 ```
 
 ## Executive summary
@@ -69,6 +70,76 @@ Question 3: script/eda for question 3, writing report for question 3 with visual
 Summarize your results. Don't try to explain every step you took; focus instead on providing the main data analytic outputs -- tables and figures -- and explaining clearly what they show. Clarify any important decisions you made in obtaining them. You can display codes if you like but it is not necessary.
 
 ### Question 1
+
+The first question was whether or not prior research experience is associated with 197A students' confidence in math, statistics and programming. To get started with this, we first looked at how people answered the survey question.
+
+```{r}
+background <- read_csv("../data/background-clean.csv", show_col_types = FALSE)
+background %>%
+  count(research)
+background = background |> filter(research != "Unsure")  |>
+  mutate(research = droplevels(factor(research)))
+```
+
+Looking at the results, only 4 people answered `unsure`. Given that so few people answered unsure and that they could have chosen this response for a variety of reasons, we decided to ignore these responses for the analysis. This leaves us with 47 responses.
+
+After doing this, we were able to analyze how research experience was associated with each of the 3 subjects. Here are our findings.
+
+#### Math
+
+```{r}
+by(background$math.comf, background$research , summary)
+```
+
+```{r}
+ggplot(background, aes(x=research, y =math.comf))+ geom_boxplot() + geom_jitter(width = 0.15, height = 0) + labs(title = "Math Confidence by Research Experience", 
+                                                                         x="Research Experience", 
+                                                                         y = "Math Confidence")
+```
+
+```{r}
+wilcox.test(math.comf ~ research, data = background)
+wilcox_effsize(background, math.comf ~ research)
+```
+
+#### Statistics
+
+```{r}
+ggplot(background, aes(x=research, y = stat.comf)) + geom_boxplot() + geom_jitter(width = 0.15, height = 0)+
+  labs(title="Statistics Confidence by Research Experience", 
+       x="Research Experience",
+       y="Statistics Confidence"
+  )
+
+```
+
+```{r}
+by(background$stat.comf, background$research , summary)
+```
+
+```{r}
+wilcox.test(stat.comf ~ research, data = background)
+wilcox_effsize(background, stat.comf ~ research)
+```
+
+#### Programming
+
+```{r}
+ggplot(background, aes(x=research, y = prog.comf)) + geom_boxplot() + geom_jitter(width = 0.15, height = 0)+
+  labs(title="Programming Confidence by Research Experience", 
+       x="Research Experience",
+       y="Programming Confidence"
+  )
+```
+
+```{r}
+by(background$prog.comf, background$research , summary)
+```
+
+```{r}
+wilcox.test(prog.comf ~ research, data = background)
+wilcox_effsize(background, prog.comf ~ research)
+```
 
 ### Question 2
 

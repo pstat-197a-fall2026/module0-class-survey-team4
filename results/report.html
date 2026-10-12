@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Emma, Katrina, Kyle, Sou, Tyler">
-<meta name="dcterms.date" content="2026-10-08">
+<meta name="dcterms.date" content="2026-10-12">
 
 <title>Analysis of class surveys</title>
 <style>
@@ -107,7 +107,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Updated</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 8, 2026</p>
+      <p class="date">October 12, 2026</p>
     </div>
   </div>
   
@@ -123,11 +123,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="executive-summary" class="level2">
 <h2 class="anchored" data-anchor-id="executive-summary">Executive summary</h2>
 <p>Write a one-paragraph abstract summarizing what you did and your findings. It need not be comprehensive; try to highlight the most important or interesting outcomes.</p>
+<p>(Overall goal: explore how proficiency and comfort level in programming/math/stats are associated with other factors and each other)</p>
+<p>question 1: Is prior research experience associated with students’ confidence in math, statistics, and programming?</p>
+<p>question 2: is proficiency and comfortability in programming, math, statistics correlated</p>
+<p>Question 3: script/eda for question 3, writing report for question 3 with visuals, etc</p>
 </section>
 <section id="data-description" class="level2">
 <h2 class="anchored" data-anchor-id="data-description">Data description</h2>
 <p>Write a brief description of the dataset. Your description should cover how data were obtained, sample characteristics, and measurements taken. It does not need to be exhaustive, but sufficiently detailed to convey a clear high-level understanding of the dataset. You can utilize bullet points or tables if you feel it would help improve clarity.</p>
-<p>The data was collected from a survey given to all students enrolled in PSTAT197A fall 2026. There are a total of 55 responses with no random selection. Demographic information about the respondents is presented as an aggregate summary. Information about skills, experience, and project preferences was recorded anonomously on an opt-in basis. 51 of the respondents consented to share skills and experience and 49 of the respondents consented to share project preferences.</p>
+<p>The data was collected from a survey given to all students enrolled in PSTAT197A fall 2026. There are a total of 55 responses with no random selection. Demographic information about the respondents is presented as an aggregate summary. Information about skills, experience, and project preferences was recorded anonymously on an opt-in basis. 51 of the respondents consented to share skills and experience and 49 of the respondents consented to share project preferences.</p>
+<p>(describe some of measurements/variables used for questions of interest)</p>
+<p>(confidence and proficiency as ordinal variables, research as categorical)</p>
+<p>(classes taken as a list)</p>
 </section>
 <section id="questions-of-interest" class="level2">
 <h2 class="anchored" data-anchor-id="questions-of-interest">Questions of interest</h2>
@@ -142,10 +149,152 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 </blockquote>
 <p>Notice that the questions are precise but not overly technical.</p>
+<p>question 1: Is prior research experience associated with students’ confidence in math, statistics, and programming?</p>
+<p>question 2: is proficiency and comfortability in programming, math, statistics correlated</p>
+<p>Question 3: script/eda for question 3, writing report for question 3 with visuals, etc</p>
 </section>
 <section id="findings" class="level2">
 <h2 class="anchored" data-anchor-id="findings">Findings</h2>
 <p>Summarize your results. Don’t try to explain every step you took; focus instead on providing the main data analytic outputs – tables and figures – and explaining clearly what they show. Clarify any important decisions you made in obtaining them. You can display codes if you like but it is not necessary.</p>
+<section id="question-1" class="level3">
+<h3 class="anchored" data-anchor-id="question-1">Question 1</h3>
+<p>The first question was whether or not prior research experience is associated with 197A students’ confidence in math, statistics and programming. To get started with this, we first looked at how people answered the survey question.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  research     n
+  &lt;chr&gt;    &lt;int&gt;
+1 No          24
+2 Unsure       4
+3 Yes         23</code></pre>
+</div>
+</div>
+<p>Looking at the results, only 4 people answered <code>unsure</code>. Given that so few people answered unsure and that they could have chosen this response for a variety of reasons, we decided to ignore these responses for the analysis. This leaves us with 47 responses.</p>
+<p>After doing this, we were able to analyze how research experience was associated with each of the 3 subjects. Here are our findings.</p>
+<section id="math" class="level4">
+<h4 class="anchored" data-anchor-id="math">Math</h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>background$research: No
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  2.000   3.000   4.000   3.833   5.000   5.000 
+------------------------------------------------------------ 
+background$research: Yes
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   3.00    4.00    4.00    4.13    5.00    5.00 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="report_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  math.comf by research
+W = 242.5, p-value = 0.4508
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 7
+  .y.       group1 group2 effsize    n1    n2 magnitude
+* &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;ord&gt;    
+1 math.comf No     Yes      0.112    24    23 small    </code></pre>
+</div>
+</div>
+</section>
+<section id="statistics" class="level4">
+<h4 class="anchored" data-anchor-id="statistics">Statistics</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="report_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>background$research: No
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   3.00    4.00    4.00    4.25    5.00    5.00 
+------------------------------------------------------------ 
+background$research: Yes
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   3.00    4.00    4.00    4.13    5.00    5.00 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  stat.comf by research
+W = 301.5, p-value = 0.5579
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 7
+  .y.       group1 group2 effsize    n1    n2 magnitude
+* &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;ord&gt;    
+1 stat.comf No     Yes     0.0872    24    23 small    </code></pre>
+</div>
+</div>
+</section>
+<section id="programming" class="level4">
+<h4 class="anchored" data-anchor-id="programming">Programming</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="report_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>background$research: No
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  2.000   3.000   3.500   3.583   4.000   5.000 
+------------------------------------------------------------ 
+background$research: Yes
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  3.000   3.500   4.000   3.957   4.000   5.000 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  prog.comf by research
+W = 202.5, p-value = 0.09368
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 7
+  .y.       group1 group2 effsize    n1    n2 magnitude
+* &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;ord&gt;    
+1 prog.comf No     Yes      0.246    24    23 small    </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="question-2" class="level3">
+<h3 class="anchored" data-anchor-id="question-2">Question 2</h3>
+</section>
+<section id="question-3" class="level3">
+<h3 class="anchored" data-anchor-id="question-3">Question 3</h3>
+</section>
 </section>
 <section id="useful-tips-remove-this-section" class="level2">
 <h2 class="anchored" data-anchor-id="useful-tips-remove-this-section">Useful tips (remove this section)</h2>
@@ -154,10 +303,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="code-chunks">Code chunks</h3>
 <p>Insert code chunks using the <em>Insert</em> drop-down menu or <code>ctrl + alt + I</code> . By default in this document, codes will not be shown but results will. If you want to change this behavior, add the chunk option <code>echo: true</code> as below.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">animal =</span> <span class="fu">c</span>(<span class="st">'snake'</span>, <span class="st">'gecko'</span>),</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">threatening =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>))</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>my_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">animal =</span> <span class="fu">c</span>(<span class="st">'snake'</span>, <span class="st">'gecko'</span>),</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">threatening =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>my_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
   animal threatening
@@ -202,7 +351,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
-<p><img src="report_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="384"></p>
+<p><img src="report_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="384"></p>
 <figcaption>A terrible plot.</figcaption>
 </figure>
 </div>
