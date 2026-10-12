@@ -1,0 +1,23 @@
+---
+title: "ClassesTakenToProficiency"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+backgroundClean <- read_csv('../data/background-clean.csv', show_col_types = FALSE)
+mini <- backgroundClean[,1:7]
+mini$PSTAT_100 <- ifelse(grepl("PSTAT 100", backgroundClean$courses), 1, 0)
+mini$PSTAT_115 <- ifelse(grepl("PSTAT 115", backgroundClean$courses), 1, 0)
+mini$PSTAT_131 <- ifelse(grepl("PSTAT 131", backgroundClean$courses), 1, 0)
+mini$PSTAT_134 <- ifelse(grepl("PSTAT 134", backgroundClean$courses), 1, 0)
+mini$PSTAT_160 <- ifelse(grepl("PSTAT 160", backgroundClean$courses), 1, 0)
+mini$PSTAT_174 <- ifelse(grepl("PSTAT 174", backgroundClean$courses), 1, 0)
+mini$PSTAT_175 <- ifelse(grepl("PSTAT 175", backgroundClean$courses), 1, 0)
+mini$CS_16 <- ifelse(grepl("CS 16", backgroundClean$courses), 1, 0)
+mini$CS_130 <- ifelse(grepl("CS 130", backgroundClean$courses), 1, 0)
+```
+
