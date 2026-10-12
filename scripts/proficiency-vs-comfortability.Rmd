@@ -16,11 +16,11 @@ library(tidyverse)
 
 ```{r}
 
-bg <- as.data.frame(read_csv("data/background-clean.csv"))
-class <- as.data.frame(read_csv("data/class-summary.csv"))
-interest <- as.data.frame(read_csv("data/interest-clean.csv"))
-response_time <- as.data.frame(read_csv("data/response-timing.csv"))
-meta_data <- as.data.frame(read_csv("data/survey-metadata.csv"))
+bg <- as.data.frame(read_csv("../data/background-clean.csv"))
+class <- as.data.frame(read_csv("../data/class-summary.csv"))
+interest <- as.data.frame(read_csv("../data/interest-clean.csv"))
+response_time <- as.data.frame(read_csv("../data/response-timing.csv"))
+meta_data <- as.data.frame(read_csv("../data/survey-metadata.csv"))
 
 head(bg)
 
@@ -87,6 +87,9 @@ combined
 
 *Inferences:*
 
-- In every subject, students who rate themselves more proficient also report higher comfort. Advanced students average about 4.3-4.4 out of 5, intermediate students about 3.5-3.7.
-- Only 3 students call themselves programming beginners, and nobody is a beginner in math or stats. The class sees itself as intermediate-to-advanced, especially in stats (33 of 51 advanced).
+- In every subject, students who rate themselves more proficient also report higher comfort. 
+
+- Advanced students average about 4.3-4.4 out of 5, intermediate students about 3.5-3.7.
+- Only 3 students call themselves programming beginners, and nobody is a beginner in math or stats.
+- The class sees itself mainly establishes themselves as intermediate-to-advanced level, especially in stats where 33 of 51 are advanced.
 - Programming has the lowest comfort among intermediates (median 3 vs. 4 in math and stats), so programming is where students feel least sure of themselves.
