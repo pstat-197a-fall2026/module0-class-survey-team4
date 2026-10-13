@@ -81,6 +81,8 @@ combined
 
 ```
 **Visuals**
+
+Bar Plot:
 ```{r}
 
 ggplot(combined, aes(x = subject, y = mean, fill = prof)) +
@@ -90,10 +92,14 @@ ggplot(combined, aes(x = subject, y = mean, fill = prof)) +
     x = "Subject",
     y = "Mean Comfortability",
     fill = "Proficiency") +
-  scale_fill_manual(values = c("lightblue", "lightyellow", "lightpink"))
+  scale_fill_manual(values = c("#89CFEF", "#7285A5", "#1C2951"))
   theme_minimal()
 
 ```
+
+Other visuals: 
+
+
 
 **Inferences:** (for sou ^)
 
