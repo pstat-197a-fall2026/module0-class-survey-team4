@@ -34,18 +34,18 @@ head(bg)
 # prof (char) vs comf (double)
 
 # programming 
-prog <- bg |>
+prog_dist <- bg |>
   group_by(prog.prof) |>
   summarise(mean = mean(prog.comf),
             median = median(prog.comf),
             count = n()) |>
   ungroup()
 
-prog
+prog_dist
 
 # math 
 
-math <- bg |>
+math_dist <- bg |>
   group_by(math.prof) |>
   summarise(mean = mean(math.comf),
             median = median(math.comf),
@@ -56,14 +56,14 @@ math
 
 # stats 
 
-stats <- bg |>
+stats_dist <- bg |>
   group_by(stat.prof) |>
   summarise(mean = mean(stat.comf),
             median = median(stat.comf),
             count = n()) |>
   ungroup()
 
-stats
+stats_dist
 
 # combine all 3 statistics into one table 
 combined <- bg |>
@@ -98,8 +98,25 @@ ggplot(combined, aes(x = subject, y = mean, fill = prof)) +
 ```
 
 Other visuals: 
+```{r}
 
+# violin plot
+# mean comfortability based on subject
+ggplot(combined, aes(x=subject, y = mean)) + 
+  geom_violin(fill = "lightblue") + 
+  labs(title = "Mean Comfortability by Subject",
+       x = "Subject",
+       y = "Mean Comfortability")
 
+# boxplot 
+ggplot(combined, aes(x=subject, y = mean)) + 
+  geom_boxplot(fill = "lightblue") + 
+  labs(title = "Mean Comfortability by Subject",
+       x = "Subject",
+       y = "Mean Comfortability")
+
+```
+In both visuals above, I am exploring the mean comfortability score by by each subject. Taken from the combined statistics above, these plots show the similarities between the math and stats comfortability score, while there is much more variability for programming, ranging lower between 3.0-4.25. As for math and stats, we can see the range falls more between 3.5-4.5.  
 
 **Inferences:** (for sou ^)
 
