@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(readr)
 library(dplyr)
 library(tidyverse)
+library(ggplot2)
 ```
 
 **Upload Raw Data**
@@ -54,6 +55,7 @@ math <- bg |>
   ungroup()
 
 math 
+
 # stats 
 
 stats <- bg |>
@@ -84,12 +86,23 @@ combined <- bg |>
 combined
 
 ```
+**Visuals**
+```{r}
+
+ggplot(combined, aes(x = subject, y = mean, fill = prof)) +
+  geom_col(position = "dodge") +
+  labs(
+    title = "Mean Comfortability by Subject and Proficiency",
+    x = "Subject",
+    y = "Mean Comfortability",
+    fill = "Proficiency"
+  ) +
+  theme_minimal()
+
+```
+
+
 
 *Inferences:*
 
-- In every subject, students who rate themselves more proficient also report higher comfort. 
-
-- Advanced students average about 4.3-4.4 out of 5, intermediate students about 3.5-3.7.
-- Only 3 students call themselves programming beginners, and nobody is a beginner in math or stats.
-- The class sees itself mainly establishes themselves as intermediate-to-advanced level, especially in stats where 33 of 51 are advanced.
-- Programming has the lowest comfort among intermediates (median 3 vs. 4 in math and stats), so programming is where students feel least sure of themselves.
+-   In every subject, students who rate themselves more proficient also report higher comfort.
