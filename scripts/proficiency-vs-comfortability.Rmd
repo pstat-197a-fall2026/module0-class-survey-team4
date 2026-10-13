@@ -36,10 +36,9 @@ head(bg)
 # programming 
 prog <- bg |>
   group_by(prog.prof) |>
-  summarise(
-    mean = mean(prog.comf),
-    median = median(prog.comf),
-    count = n()) |>
+  summarise(mean = mean(prog.comf),
+            median = median(prog.comf),
+            count = n()) |>
   ungroup()
 
 prog
@@ -48,10 +47,9 @@ prog
 
 math <- bg |>
   group_by(math.prof) |>
-  summarise(
-    mean = mean(math.comf),
-    median = median(math.comf),
-    count = n()) |>
+  summarise(mean = mean(math.comf),
+            median = median(math.comf),
+            count = n()) |>
   ungroup()
 
 math 
@@ -60,28 +58,24 @@ math
 
 stats <- bg |>
   group_by(stat.prof) |>
-  summarise(
-    mean = mean(stat.comf),
-    median = median(stat.comf),
-    count = n()) |>
+  summarise(mean = mean(stat.comf),
+            median = median(stat.comf),
+            count = n()) |>
   ungroup()
 
 stats
 
+# combine all 3 statistics into one table 
 combined <- bg |>
-  pivot_longer(
-    cols = c(prog.prof, math.prof, stat.prof,
+  pivot_longer(cols = c(prog.prof, math.prof, stat.prof,
              prog.comf, math.comf, stat.comf),
-    names_to = c("subject", ".value"),
-    names_pattern = "(prog|math|stat)\\.(prof|comf)"
-  ) |>
+             names_to = c("subject", ".value"),
+             names_pattern = "(prog|math|stat)\\.(prof|comf)") |>
   group_by(subject, prof) |>
-  summarise(
-    mean = mean(comf, na.rm = TRUE),
-    median = median(comf, na.rm = TRUE),
-    count = n(),
-    .groups = "drop"
-  )
+  summarise(mean = mean(comf, na.rm = TRUE),
+            median = median(comf, na.rm = TRUE),
+            count = n(),
+            .groups = "drop")
 
 combined
 
@@ -95,14 +89,12 @@ ggplot(combined, aes(x = subject, y = mean, fill = prof)) +
     title = "Mean Comfortability by Subject and Proficiency",
     x = "Subject",
     y = "Mean Comfortability",
-    fill = "Proficiency"
-  ) +
+    fill = "Proficiency") +
+  scale_fill_manual(values = c("lightblue", "lightyellow", "lightpink"))
   theme_minimal()
 
 ```
 
-
-
-*Inferences:*
+**Inferences:** (for sou ^)
 
 -   In every subject, students who rate themselves more proficient also report higher comfort.
