@@ -97,12 +97,19 @@ ggplot(background, aes(x=research, y =math.comf))+ geom_boxplot() + geom_jitter(
                                                                          y = "Math Confidence")
 ```
 
+Looking at the basic summary statistics and boxplots, it doesn't look like research experience has an effect on math confidence. To confirm this, we calculated the effect size:
+
 ```{r}
-wilcox.test(math.comf ~ research, data = background)
 wilcox_effsize(background, math.comf ~ research)
 ```
 
+While there is a slight tilt toward research-experienced students, math confidence is largely distributed evenly across both halves of the class regardless of whether they've done research before.
+
 #### Statistics
+
+```{r}
+by(background$stat.comf, background$research , summary)
+```
 
 ```{r}
 ggplot(background, aes(x=research, y = stat.comf)) + geom_boxplot() + geom_jitter(width = 0.15, height = 0)+
@@ -113,16 +120,19 @@ ggplot(background, aes(x=research, y = stat.comf)) + geom_boxplot() + geom_jitte
 
 ```
 
-```{r}
-by(background$stat.comf, background$research , summary)
-```
+Looking at the basic summary statistics and boxplots, it also doesn't look like research experience has an effect on statistics confidence. To confirm this, we calculated the effect size:
 
 ```{r}
-wilcox.test(stat.comf ~ research, data = background)
 wilcox_effsize(background, stat.comf ~ research)
 ```
 
+Prior research experience has virtually no bearing on how confident 197A students feel about statistics. Both groups report very comparable levels of self-assessed statistical ability, which makes sense given they are all enrolled in an upper-level PSTAT course.
+
 #### Programming
+
+```{r}
+by(background$prog.comf, background$research , summary)
+```
 
 ```{r}
 ggplot(background, aes(x=research, y = prog.comf)) + geom_boxplot() + geom_jitter(width = 0.15, height = 0)+
@@ -132,18 +142,21 @@ ggplot(background, aes(x=research, y = prog.comf)) + geom_boxplot() + geom_jitte
   )
 ```
 
-```{r}
-by(background$prog.comf, background$research , summary)
-```
+For programming, the results are a little more interesting. The median is slightly higher for the students with research experience. To confirm this, we calculated the effect size:
 
 ```{r}
-wilcox.test(prog.comf ~ research, data = background)
 wilcox_effsize(background, prog.comf ~ research)
 ```
+
+The effect size is more than twice as large as the one for math. The magnitude is still small, but students with prior research experience report a noticeably higher rank in programming confidence compared to their peers without research experience. This makes sense, as past research experience likely had those students work with code.
 
 ### Question 2
 
 ### Question 3
+
+### Conclusion
+
+summary of everything, limitations of study (not random, opt in)
 
 ## Useful tips (remove this section)
 
