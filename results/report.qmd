@@ -1,7 +1,7 @@
 ---
 title: "Analysis of class surveys"
 subtitle: "If you want a subtitle put it here"
-author: "Emma, Katrina, Kyle, Sou, Tyler"
+author: "Emma, Katrina, Kyle, Sou, Tyler, Anika"
 date: last-modified
 published-title: "Updated"
 editor: visual
@@ -31,7 +31,7 @@ question 1: Is prior research experience associated with students’ confidence 
 
 question 2: is proficiency and comfortability in programming, math, statistics correlated
 
-Question 3: script/eda for question 3, writing report for question 3 with visuals, etc
+Question 3: Is taking specific upper-division courses associated with students' self-assessed comfort and proficiency in math, statistics, and programming?
 
 ## Data description
 
@@ -153,6 +153,117 @@ The effect size is more than twice as large as the one for math. The magnitude i
 ### Question 2
 
 ### Question 3
+
+The third question was whether taking specific upper-division classes is associated with 197A students' self-assessed comfort and proficiency in math, statistics, and programming. To answer this, we first turned each student's course list into a set of yes/no indicators for the courses we were interested in. 
+
+```{r}
+q3 <- read_csv("../data/background-clean.csv", show_col_types = FALSE)
+
+classes <- c("PSTAT_100", "PSTAT_115", "PSTAT_131", "PSTAT_134", "PSTAT_160",
+             "PSTAT_174", "PSTAT_175", "CS_16")
+
+q3 <- q3 %>%
+  select(prog.prof:stat.comf, courses) %>%
+  mutate(across(ends_with(".prof"),
+                ~ case_when(.x == "beg" ~ -1, .x == "int" ~ 0, .x == "adv" ~ 1)))
+
+for (cl in classes) {
+  q3[[cl]] <- as.numeric(grepl(paste0("\\b", gsub("_", " ", cl), "\\b"), q3$courses))
+}
+
+tibble(Course = gsub("_", " ", classes), Students = colSums(q3[classes])) %>%
+  knitr::kable()
+```
+We left out courses that almost everyone in the class has taken (PSTAT 10, 120, 122, 126, and CS 9), since there's no variation to compare. Proficiency was recorded as beginner/intermediate/advanced, so we encoded these into the numerical values -1, 0 and 1 respectively; comfort was already on a 1-5 scale. (Note: only one student has taken CS 130, so any result for that course is really just one person)
+
+We then calculated the correlation between taking each course and each of the six comfort/proficiency measures. Here are our findings.
+
+#### Statistics 
+
+```{r}
+stat_cor <- tibble(
+  course = fct_inorder(gsub("_", " ", classes)),
+  Comfort = cor(q3[classes], q3$stat.comf)[, 1],
+  Proficiency = cor(q3[classes], q3$stat.prof)[, 1]
+)
+
+stat_cor %>%
+  pivot_longer(c(Comfort, Proficiency), names_to = "measure", values_to = "r") %>%
+  ggplot(aes(x = course, y = r, fill = measure)) +
+  geom_col(position = "dodge") +
+  geom_hline(yintercept = 0) +
+  labs(title = "Statistics Comfort and Proficiency by Course Taken",
+       x = "Course", y = "Correlation", fill = NULL) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+Statistics comfort barely changes with any course; every correlation is below 0.2 in size. Statistics proficiency shows a bit more: students who took PSTAT 131 rate themselves higher (r = 0.31), while students who took CS 16 rate themselves lower (r = -0.31). The more theoretical courses (PSTAT 160, 174, 175) lean slightly negative for both comfort and proficiency, which might mean those courses make students more aware of what they don't know yet.
+
+#### Math
+
+```{r}
+math_cor <- tibble(
+  course = fct_inorder(gsub("_", " ", classes)),
+  Comfort = cor(q3[classes], q3$math.comf)[, 1],
+  Proficiency = cor(q3[classes], q3$math.prof)[, 1]
+)
+
+math_cor %>%
+  pivot_longer(c(Comfort, Proficiency), names_to = "measure", values_to = "r") %>%
+  ggplot(aes(x = course, y = r, fill = measure)) +
+  geom_col(position = "dodge") +
+  geom_hline(yintercept = 0) +
+  labs(title = "Math Comfort and Proficiency by Course Taken",
+       x = "Course", y = "Correlation", fill = NULL) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+Math is the least connected to coursework. All correlations are weak, and the only consistent pattern is that the theory-heavy courses (PSTAT 160, 174, 175) are slightly negative for math proficiency, similar to what we saw for statistics.
+
+#### Programming
+
+```{r}
+prog_cor <- tibble(
+  course = fct_inorder(gsub("_", " ", classes)),
+  Comfort = cor(q3[classes], q3$prog.comf)[, 1],
+  Proficiency = cor(q3[classes], q3$prog.prof)[, 1]
+)
+
+prog_cor %>%
+  pivot_longer(c(Comfort, Proficiency), names_to = "measure", values_to = "r") %>%
+  ggplot(aes(x = course, y = r, fill = measure)) +
+  geom_col(position = "dodge") +
+  geom_hline(yintercept = 0) +
+  labs(title = "Programming Comfort and Proficiency by Course Taken",
+       x = "Course", y = "Correlation", fill = NULL) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+Programming has the clearest pattern. PSTAT 134 has the strongest correlation in the whole analysis with programming comfort (r = 0.35), and PSTAT 131 is positive for both comfort and proficiency. This makes sense, as both are coding-heavy data science courses. Interestingly, CS 16 isn't associated with higher programming comfort or proficiency, possibly because it's often taken early and students' coding has moved on since.
+
+#### Regression
+
+To see whether the courses together predict comfort and proficiency, we fit a linear regression for each of the six measures using all nine course indicators as predictors.
+
+```{r}
+outcomes <- c("stat.comf", "stat.prof", "math.comf", "math.prof", "prog.comf", "prog.prof")
+
+q3_fit <- function(outcome) {
+  fit <- lm(reformulate(classes, outcome), data = q3)
+  s <- summary(fit)
+  co <- s$coefficients[-1, ]
+  top <- which.min(co[, 4])
+  tibble(Outcome = outcome,
+         `R-squared` = round(s$r.squared, 2),
+         `Overall p-value` = round(pf(s$fstatistic[1], s$fstatistic[2], s$fstatistic[3],
+                                      lower.tail = FALSE), 3),
+         `Strongest course` = gsub("_", " ", rownames(co)[top]),
+         Estimate = round(co[top, 1], 2),
+         `Course p-value` = round(co[top, 4], 3))
+}
+
+map_dfr(outcomes, q3_fit) %>% knitr::kable()
+```
+
+None of the six models is significant overall at the 0.05 level; statistics proficiency comes closest (p = 0.09). The one course that stands out on its own is PSTAT 134 for programming comfort (p = 0.02), which matches the correlation above. With nine predictors and only 51 students, these results are exploratory: coursework seems to matter most for programming and least for math, but the effects are small and could easily change with a different class.
 
 ### Conclusion
 
