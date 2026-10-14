@@ -33,6 +33,7 @@ mini$CS_130 <- ifelse(grepl("CS 130", backgroundClean$courses), 1, 0)
 ```
 
 ## Exploratory Data Analysis
+Only using selected classes as all other classes in data set are commmon among all students within data set
 
 ### Stats comfort
 Shows high correlation towards pstat 100, 115, and 131, and 134. Bit weird because those are the more coding heavy classes and not stats heavy classes. Negative correlation for pstat 160, 174, and 175 is also interesting bc they are the more advanced theoretical stats classes. Boxplots shows this same trend but also highlights heavy variation and overlap from groups. Cs classes also show negative correlation.
@@ -142,3 +143,34 @@ boxplot(list(PSTAT_100 = mini[mini$PSTAT_100 == 1,]$prog.prof,
 ```
 
 ## Data analysis
+Used linear regression as simple predictor for comfort and proficiency for stats, math, and programming. Unfortunately nothing is too significant as a predictor for comfort or profficiency, there are mor just general trends among the data. It is important to note data set is tiny so such trends kind of only can be observed as generalizations with very little reliable statistical backing.
+### Statistics comfort
+```{r}
+comf_stat <- lm(stat.comf ~ PSTAT_100+PSTAT_115+PSTAT_131+PSTAT_134+PSTAT_160+PSTAT_174+PSTAT_175+CS_16+CS_130, data = mini)
+summary(comf_stat)
+```
+### Statistics proficiency
+```{r}
+prof_stat <- lm(stat.prof ~ PSTAT_100+PSTAT_115+PSTAT_131+PSTAT_134+PSTAT_160+PSTAT_174+PSTAT_175+CS_16+CS_130, data = mini)
+summary(prof_stat)
+```
+### Math comfort
+```{r}
+comf_math <- lm(math.comf ~ PSTAT_100+PSTAT_115+PSTAT_131+PSTAT_134+PSTAT_160+PSTAT_174+PSTAT_175+CS_16+CS_130, data = mini)
+summary(comf_math)
+```
+### Math proficiency
+```{r}
+prof_math <- lm(math.prof ~ PSTAT_100+PSTAT_115+PSTAT_131+PSTAT_134+PSTAT_160+PSTAT_174+PSTAT_175+CS_16+CS_130, data = mini)
+summary(prof_math)
+```
+### Programming comfort
+```{r}
+comf_prog <- lm(prog.comf ~ PSTAT_100+PSTAT_115+PSTAT_131+PSTAT_134+PSTAT_160+PSTAT_174+PSTAT_175+CS_16+CS_130, data = mini)
+summary(comf_prog)
+```
+### Programming proficiency
+```{r}
+prof_prog <- lm(prog.prof ~ PSTAT_100+PSTAT_115+PSTAT_131+PSTAT_134+PSTAT_160+PSTAT_174+PSTAT_175+CS_16+CS_130, data = mini)
+summary(prof_prog)
+```
