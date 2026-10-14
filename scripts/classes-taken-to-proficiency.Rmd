@@ -6,6 +6,7 @@ output: html_document
 ```{r, echo = FALSE}
 library(tidyverse)
 library(dplyr)
+library(coin)
 ```
 
 ```{r, echo = FALSE}
@@ -40,7 +41,8 @@ Shows high correlation towards pstat 100, 115, and 131, and 134. Bit weird becau
 ```{r, echo = FALSE}
 cor_matrix <- cor(mini[,-c(1, 2, 3, 4, 5, 6)], use = "complete.obs")
 print(cor_matrix[1,])
-barplot(cor_matrix[1,-c(1)], las = 2, cex.names = 0.7, main = "Classes to Stats comfort correlation correlation values")
+barplot(cor_matrix[1,-c(1)], cex.names = 0.5, cex.axis = 0.75,
+        main = "Classes to Stats Comfort Correlation Values", xlab = "Classes", ylab = "Correlation")
 boxplot(list(PSTAT_100 = mini[mini$PSTAT_100 == 1,]$stat.comf,
              PSTAT_115 = mini[mini$PSTAT_115 == 1,]$stat.comf,
              PSTAT_131 = mini[mini$PSTAT_131 == 1,]$stat.comf,
@@ -50,7 +52,11 @@ boxplot(list(PSTAT_100 = mini[mini$PSTAT_100 == 1,]$stat.comf,
              PSTAT_175 = mini[mini$PSTAT_175 == 1,]$stat.comf,
              CS_16 = mini[mini$CS_16 == 1,]$stat.comf,
              CS_130 = mini[mini$CS_130 == 1,]$stat.comf), 
-        las = 2, cex.names = 0.7, main = "Classes to Stats comfort boxplots")
+        cex.names = 0.4, cex.axis = 0.75, main = "Classes to Stats Comfort Boxplots", xlab = "Classes", ylab = "Comfort", xaxt = "n")
+axis(side = 1,
+     at = 1:9,
+     labels = names(mini[,-c(1, 2, 3, 4, 5, 6, 7)]),
+     cex.axis = 0.5)
 ```
 
 ### Stats proficiency
@@ -58,7 +64,8 @@ Shows high correlation towards pstat 100, 115, and 131. Bit weird because those 
 ```{r, echo = FALSE}
 cor_matrix <- cor(mini[,-c(1, 2, 3, 4, 5, 7)], use = "complete.obs")
 print(cor_matrix[1,])
-barplot(cor_matrix[1,-c(1)], las = 2, cex.names = 0.7, main = "Classes to Stats proficiency correlation values")
+barplot(cor_matrix[1,-c(1)], cex.names = 0.5, cex.axis = 0.75,
+        main = "Classes to Stats Proficiency Correlation Values", xlab = "Classes", ylab = "Correlation")
 boxplot(list(PSTAT_100 = mini[mini$PSTAT_100 == 1,]$stat.prof,
              PSTAT_115 = mini[mini$PSTAT_115 == 1,]$stat.prof,
              PSTAT_131 = mini[mini$PSTAT_131 == 1,]$stat.prof,
@@ -68,7 +75,11 @@ boxplot(list(PSTAT_100 = mini[mini$PSTAT_100 == 1,]$stat.prof,
              PSTAT_175 = mini[mini$PSTAT_175 == 1,]$stat.prof,
              CS_16 = mini[mini$CS_16 == 1,]$stat.prof,
              CS_130 = mini[mini$CS_130 == 1,]$stat.prof), 
-        las = 2, cex.names = 0.7, main = "Classes to Stats proficiency boxplots")
+        cex.names = 0.4, cex.axis = 0.75, main = "Classes to Stats Proficiency Boxplots", xlab = "Classes", ylab = "Proficiency", xaxt = "n")
+axis(side = 1,
+     at = 1:9,
+     labels = names(mini[,-c(1, 2, 3, 4, 5, 6, 7)]),
+     cex.axis = 0.5)
 ```
 
 ### Math comfort
@@ -76,7 +87,8 @@ Math comfort is fairly random among classes.
 ```{r, echo = FALSE}
 cor_matrix <- cor(mini[,-c(1, 2, 3, 4, 6, 7)], use = "complete.obs")
 print(cor_matrix[1,])
-barplot(cor_matrix[1,-c(1)], las = 2, cex.names = 0.7, main = "Classes to Math comfort correlation values")
+barplot(cor_matrix[1,-c(1)], cex.names = 0.5, cex.axis = 0.75,
+        main = "Classes to Math Comfort Correlation Values", xlab = "Classes", ylab = "Correlation")
 boxplot(list(PSTAT_100 = mini[mini$PSTAT_100 == 1,]$math.comf,
              PSTAT_115 = mini[mini$PSTAT_115 == 1,]$math.comf,
              PSTAT_131 = mini[mini$PSTAT_131 == 1,]$math.comf,
@@ -86,7 +98,11 @@ boxplot(list(PSTAT_100 = mini[mini$PSTAT_100 == 1,]$math.comf,
              PSTAT_175 = mini[mini$PSTAT_175 == 1,]$math.comf,
              CS_16 = mini[mini$CS_16 == 1,]$math.comf,
              CS_130 = mini[mini$CS_130 == 1,]$math.comf), 
-        las = 2, cex.names = 0.7, main = "Classes to Math comfort boxplots")
+        cex.names = 0.4, cex.axis = 0.75, main = "Classes to Math Comfort Boxplots", xlab = "Classes", ylab = "Comfort", xaxt = "n")
+axis(side = 1,
+     at = 1:9,
+     labels = names(mini[,-c(1, 2, 3, 4, 5, 6, 7)]),
+     cex.axis = 0.5)
 ```
 
 ### Math proficiency
@@ -94,7 +110,8 @@ Shows similar trend as stats where the stats classes that actualy utilize a lot 
 ```{r, echo = FALSE}
 cor_matrix <- cor(mini[,-c(1, 2, 3, 5, 6, 7)], use = "complete.obs")
 print(cor_matrix[1,])
-barplot(cor_matrix[1,-c(1)], las = 2, cex.names = 0.7, main = "Classes to Math proficiency correlation values")
+barplot(cor_matrix[1,-c(1)], cex.names = 0.5, cex.axis = 0.75,
+        main = "Classes to Math Proficiency Correlation Values", xlab = "Classes", ylab = "Correlation")
 boxplot(list(PSTAT_100 = mini[mini$PSTAT_100 == 1,]$math.prof,
              PSTAT_115 = mini[mini$PSTAT_115 == 1,]$math.prof,
              PSTAT_131 = mini[mini$PSTAT_131 == 1,]$math.prof,
@@ -104,7 +121,11 @@ boxplot(list(PSTAT_100 = mini[mini$PSTAT_100 == 1,]$math.prof,
              PSTAT_175 = mini[mini$PSTAT_175 == 1,]$math.prof,
              CS_16 = mini[mini$CS_16 == 1,]$math.prof,
              CS_130 = mini[mini$CS_130 == 1,]$math.prof), 
-        las = 2, cex.names = 0.7, main = "Classes to Math proficiency boxplots")
+        cex.names = 0.4, cex.axis = 0.75, main = "Classes to Math Proficiency Boxplots", xlab = "Classes", ylab = "Proficiency", xaxt = "n")
+axis(side = 1,
+     at = 1:9,
+     labels = names(mini[,-c(1, 2, 3, 4, 5, 6, 7)]),
+     cex.axis = 0.5)
 ```
 
 ### Programming comfort
@@ -112,7 +133,8 @@ Programming comfort Shows high correlation towards pstat 100, 115, 131, and 134.
 ```{r, echo = FALSE}
 cor_matrix <- cor(mini[,-c(1, 2, 4, 5, 6, 7)], use = "complete.obs")
 print(cor_matrix[1,])
-barplot(cor_matrix[1,-c(1)], las = 2, cex.names = 0.7, main = "Classes to Programming comfort correlation values")
+barplot(cor_matrix[1,-c(1)], cex.names = 0.5, cex.axis = 0.75,
+        main = "Classes to Programming Comfort Correlation Values", xlab = "Classes", ylab = "Correlation")
 boxplot(list(PSTAT_100 = mini[mini$PSTAT_100 == 1,]$prog.comf,
              PSTAT_115 = mini[mini$PSTAT_115 == 1,]$prog.comf,
              PSTAT_131 = mini[mini$PSTAT_131 == 1,]$prog.comf,
@@ -121,7 +143,11 @@ boxplot(list(PSTAT_100 = mini[mini$PSTAT_100 == 1,]$prog.comf,
              PSTAT_175 = mini[mini$PSTAT_175 == 1,]$prog.comf,
              CS_16 = mini[mini$CS_16 == 1,]$prog.comf,
              CS_130 = mini[mini$CS_130 == 1,]$prog.comf), 
-        las = 2, cex.names = 0.7, main = "Classes to Programming comfort boxplots")
+        cex.names = 0.4, cex.axis = 0.75, main = "Classes to Programming Comfort Boxplots", xlab = "Classes", ylab = "Comfort", xaxt = "n")
+axis(side = 1,
+     at = 1:9,
+     labels = names(mini[,-c(1, 2, 3, 4, 5, 6, 7)]),
+     cex.axis = 0.5)
 ```
 
 ### Programming proficiency
@@ -129,7 +155,8 @@ Programming comfort Shows high profficiency towards pstat 131 and 134. Pretty mu
 ```{r, echo = FALSE}
 cor_matrix <- cor(mini[,-c(1, 3, 4, 5, 6, 7)], use = "complete.obs")
 print(cor_matrix[1,])
-barplot(cor_matrix[1,-c(1)], las = 2, cex.names = 0.7, main = "Classes to Programming proficiency correlation values")
+barplot(cor_matrix[1,-c(1)], cex.names = 0.5, cex.axis = 0.75,
+        main = "Classes to Programming Proficiency Correlation Values", xlab = "Classes", ylab = "Correlation")
 boxplot(list(PSTAT_100 = mini[mini$PSTAT_100 == 1,]$prog.prof,
              PSTAT_115 = mini[mini$PSTAT_115 == 1,]$prog.prof,
              PSTAT_131 = mini[mini$PSTAT_131 == 1,]$prog.prof,
@@ -139,7 +166,11 @@ boxplot(list(PSTAT_100 = mini[mini$PSTAT_100 == 1,]$prog.prof,
              PSTAT_175 = mini[mini$PSTAT_175 == 1,]$prog.prof,
              CS_16 = mini[mini$CS_16 == 1,]$prog.prof,
              CS_130 = mini[mini$CS_130 == 1,]$prog.prof), 
-        las = 2, cex.names = 0.7, main = "Classes to Programming proficiency boxplots")
+        cex.names = 0.5, cex.axis = 0.75, main = "Classes to Programming Proficiency Boxplots", xlab = "Classes", ylab = "Proficiency", xaxt = "n")
+axis(side = 1,
+     at = 1:9,
+     labels = names(mini[,-c(1, 2, 3, 4, 5, 6, 7)]),
+     cex.axis = 0.5)
 ```
 
 ## Data analysis
