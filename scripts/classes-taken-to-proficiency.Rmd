@@ -34,25 +34,102 @@ mini$CS_130 <- ifelse(grepl("CS 130", backgroundClean$courses), 1, 0)
 
 ## Exploratory Data Analysis
 
+# Stats comfort
+
 ```{r, echo = FALSE}
 cor_matrix <- cor(mini[,-c(1, 2, 3, 4, 5, 6)], use = "complete.obs")
 print(cor_matrix[1,])
-barplot(cor_matrix[1,-c(1)], las = 2, cex.names = 0.7, main = "Classes to Stats comfort correlation")
-boxplot(mini[mini$PSTAT_131 == 1,]$stat.comf)
-cor_matrix <- cor(mini[,-c(1, 2, 3, 4, 5, 7)], use = "complete.obs")
-print(cor_matrix[1,])
-barplot(cor_matrix[1,-c(1)], las = 2, cex.names = 0.7, main = "Classes to Stats proficiency")
-cor_matrix <- cor(mini[,-c(1, 2, 3, 4, 6, 7)], use = "complete.obs")
-print(cor_matrix[1,])
-barplot(cor_matrix[1,-c(1)], las = 2, cex.names = 0.7, main = "Classes to Math comfort")
-cor_matrix <- cor(mini[,-c(1, 2, 3, 5, 6, 7)], use = "complete.obs")
-print(cor_matrix[1,])
-barplot(cor_matrix[1,-c(1)], las = 2, cex.names = 0.7, main = "Classes to Math proficiency")
-cor_matrix <- cor(mini[,-c(1, 2, 4, 5, 6, 7)], use = "complete.obs")
-print(cor_matrix[1,])
-barplot(cor_matrix[1,-c(1)], las = 2, cex.names = 0.7, main = "Classes to Programming comfort")
-cor_matrix <- cor(mini[,-c(1, 3, 4, 5, 6, 7)], use = "complete.obs")
-print(cor_matrix[1,])
-barplot(cor_matrix[1,-c(1)], las = 2, cex.names = 0.7, main = "Classes to Programming proficiency")
+barplot(cor_matrix[1,-c(1)], las = 2, cex.names = 0.7, main = "Classes to Stats comfort correlation correlation values")
+boxplot(list(PSTAT_100 = mini[mini$PSTAT_100 == 1,]$stat.comf,
+             PSTAT_115 = mini[mini$PSTAT_115 == 1,]$stat.comf,
+             PSTAT_131 = mini[mini$PSTAT_131 == 1,]$stat.comf,
+             PSTAT_134 = mini[mini$PSTAT_134 == 1,]$stat.comf,
+             PSTAT_160 = mini[mini$PSTAT_160 == 1,]$stat.comf,
+             PSTAT_174 = mini[mini$PSTAT_174 == 1,]$stat.comf,
+             PSTAT_175 = mini[mini$PSTAT_175 == 1,]$stat.comf,
+             CS_16 = mini[mini$CS_16 == 1,]$stat.comf,
+             CS_130 = mini[mini$CS_130 == 1,]$stat.comf), 
+        las = 2, cex.names = 0.7, main = "Classes to Stats comfort boxplots")
 ```
 
+# Stats comfort
+```{r, echo = FALSE}
+cor_matrix <- cor(mini[,-c(1, 2, 3, 4, 5, 7)], use = "complete.obs")
+print(cor_matrix[1,])
+barplot(cor_matrix[1,-c(1)], las = 2, cex.names = 0.7, main = "Classes to Stats proficiency correlation values")
+boxplot(list(PSTAT_100 = mini[mini$PSTAT_100 == 1,]$stat.prof,
+             PSTAT_115 = mini[mini$PSTAT_115 == 1,]$stat.prof,
+             PSTAT_131 = mini[mini$PSTAT_131 == 1,]$stat.prof,
+             PSTAT_134 = mini[mini$PSTAT_134 == 1,]$stat.prof,
+             PSTAT_160 = mini[mini$PSTAT_160 == 1,]$stat.prof,
+             PSTAT_174 = mini[mini$PSTAT_174 == 1,]$stat.prof,
+             PSTAT_175 = mini[mini$PSTAT_175 == 1,]$stat.prof,
+             CS_16 = mini[mini$CS_16 == 1,]$stat.prof,
+             CS_130 = mini[mini$CS_130 == 1,]$stat.prof), 
+        las = 2, cex.names = 0.7, main = "Classes to Stats proficiency boxplots")
+```
+
+```{r, echo = FALSE}
+cor_matrix <- cor(mini[,-c(1, 2, 3, 4, 6, 7)], use = "complete.obs")
+print(cor_matrix[1,])
+barplot(cor_matrix[1,-c(1)], las = 2, cex.names = 0.7, main = "Classes to Math comfort correlation values")
+boxplot(list(PSTAT_100 = mini[mini$PSTAT_100 == 1,]$math.comf,
+             PSTAT_115 = mini[mini$PSTAT_115 == 1,]$math.comf,
+             PSTAT_131 = mini[mini$PSTAT_131 == 1,]$math.comf,
+             PSTAT_134 = mini[mini$PSTAT_134 == 1,]$math.comf,
+             PSTAT_160 = mini[mini$PSTAT_160 == 1,]$math.comf,
+             PSTAT_174 = mini[mini$PSTAT_174 == 1,]$math.comf,
+             PSTAT_175 = mini[mini$PSTAT_175 == 1,]$math.comf,
+             CS_16 = mini[mini$CS_16 == 1,]$math.comf,
+             CS_130 = mini[mini$CS_130 == 1,]$math.comf), 
+        las = 2, cex.names = 0.7, main = "Classes to Math comfort boxplots")
+```
+
+```{r, echo = FALSE}
+cor_matrix <- cor(mini[,-c(1, 2, 3, 5, 6, 7)], use = "complete.obs")
+print(cor_matrix[1,])
+barplot(cor_matrix[1,-c(1)], las = 2, cex.names = 0.7, main = "Classes to Math proficiency correlation values")
+boxplot(list(PSTAT_100 = mini[mini$PSTAT_100 == 1,]$math.prof,
+             PSTAT_115 = mini[mini$PSTAT_115 == 1,]$math.prof,
+             PSTAT_131 = mini[mini$PSTAT_131 == 1,]$math.prof,
+             PSTAT_134 = mini[mini$PSTAT_134 == 1,]$math.prof,
+             PSTAT_160 = mini[mini$PSTAT_160 == 1,]$math.prof,
+             PSTAT_174 = mini[mini$PSTAT_174 == 1,]$math.prof,
+             PSTAT_175 = mini[mini$PSTAT_175 == 1,]$math.prof,
+             CS_16 = mini[mini$CS_16 == 1,]$math.prof,
+             CS_130 = mini[mini$CS_130 == 1,]$math.prof), 
+        las = 2, cex.names = 0.7, main = "Classes to Math proficiency boxplots")
+```
+
+```{r, echo = FALSE}
+cor_matrix <- cor(mini[,-c(1, 2, 4, 5, 6, 7)], use = "complete.obs")
+print(cor_matrix[1,])
+barplot(cor_matrix[1,-c(1)], las = 2, cex.names = 0.7, main = "Classes to Programming comfort correlation values")
+boxplot(list(PSTAT_100 = mini[mini$PSTAT_100 == 1,]$prog.comf,
+             PSTAT_115 = mini[mini$PSTAT_115 == 1,]$prog.comf,
+             PSTAT_131 = mini[mini$PSTAT_131 == 1,]$prog.comf,
+             PSTAT_134 = mini[mini$PSTAT_134 == 1,]$prog.comf,
+             PSTAT_174 = mini[mini$PSTAT_174 == 1,]$prog.comf,
+             PSTAT_175 = mini[mini$PSTAT_175 == 1,]$prog.comf,
+             CS_16 = mini[mini$CS_16 == 1,]$prog.comf,
+             CS_130 = mini[mini$CS_130 == 1,]$prog.comf), 
+        las = 2, cex.names = 0.7, main = "Classes to Programming comfort boxplots")
+```
+
+```{r, echo = FALSE}
+cor_matrix <- cor(mini[,-c(1, 3, 4, 5, 6, 7)], use = "complete.obs")
+print(cor_matrix[1,])
+barplot(cor_matrix[1,-c(1)], las = 2, cex.names = 0.7, main = "Classes to Programming proficiency correlation values")
+boxplot(list(PSTAT_100 = mini[mini$PSTAT_100 == 1,]$prog.prof,
+             PSTAT_115 = mini[mini$PSTAT_115 == 1,]$prog.prof,
+             PSTAT_131 = mini[mini$PSTAT_131 == 1,]$prog.prof,
+             PSTAT_134 = mini[mini$PSTAT_134 == 1,]$prog.prof,
+             PSTAT_160 = mini[mini$PSTAT_160 == 1,]$prog.prof,
+             PSTAT_174 = mini[mini$PSTAT_174 == 1,]$prog.prof,
+             PSTAT_175 = mini[mini$PSTAT_175 == 1,]$prog.prof,
+             CS_16 = mini[mini$CS_16 == 1,]$prog.prof,
+             CS_130 = mini[mini$CS_130 == 1,]$prog.prof), 
+        las = 2, cex.names = 0.7, main = "Classes to Programming proficiency boxplots")
+```
+
+## Data analysis
