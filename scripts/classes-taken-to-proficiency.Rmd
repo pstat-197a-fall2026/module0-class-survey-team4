@@ -3,13 +3,24 @@ title: "ClassesTakenToProficiency"
 output: html_document
 ---
 
-```{r}
+```{r, echo = FALSE}
 library(tidyverse)
+library(dplyr)
 ```
 
-```{r}
+```{r, echo = FALSE}
 backgroundClean <- read_csv('../data/background-clean.csv', show_col_types = FALSE)
 mini <- backgroundClean[,1:7]
+mini <- mini %>%
+  mutate(prog.prof = case_when(prog.prof == "beg"  ~ -1,
+                               prog.prof == "int" ~ 0,
+                               TRUE      ~ 1),
+         math.prof = case_when(math.prof == "beg"  ~ -1,
+                               math.prof == "int" ~ 0,
+                               TRUE      ~ 1),
+         stat.prof = case_when(stat.prof == "beg"  ~ -1,
+                               stat.prof == "int" ~ 0,
+                               TRUE      ~ 1),)
 mini$PSTAT_100 <- ifelse(grepl("PSTAT 100", backgroundClean$courses), 1, 0)
 mini$PSTAT_115 <- ifelse(grepl("PSTAT 115", backgroundClean$courses), 1, 0)
 mini$PSTAT_131 <- ifelse(grepl("PSTAT 131", backgroundClean$courses), 1, 0)
@@ -19,5 +30,29 @@ mini$PSTAT_174 <- ifelse(grepl("PSTAT 174", backgroundClean$courses), 1, 0)
 mini$PSTAT_175 <- ifelse(grepl("PSTAT 175", backgroundClean$courses), 1, 0)
 mini$CS_16 <- ifelse(grepl("CS 16", backgroundClean$courses), 1, 0)
 mini$CS_130 <- ifelse(grepl("CS 130", backgroundClean$courses), 1, 0)
+```
+
+## Exploratory Data Analysis
+
+```{r, echo = FALSE}
+cor_matrix <- cor(mini[,-c(1, 2, 3, 4, 5, 6)], use = "complete.obs")
+print(cor_matrix[1,])
+barplot(cor_matrix[1,-c(1)], las = 2, cex.names = 0.7, main = "Classes to Stats comfort correlation")
+boxplot(mini[mini$PSTAT_131 == 1,]$stat.comf)
+cor_matrix <- cor(mini[,-c(1, 2, 3, 4, 5, 7)], use = "complete.obs")
+print(cor_matrix[1,])
+barplot(cor_matrix[1,-c(1)], las = 2, cex.names = 0.7, main = "Classes to Stats proficiency")
+cor_matrix <- cor(mini[,-c(1, 2, 3, 4, 6, 7)], use = "complete.obs")
+print(cor_matrix[1,])
+barplot(cor_matrix[1,-c(1)], las = 2, cex.names = 0.7, main = "Classes to Math comfort")
+cor_matrix <- cor(mini[,-c(1, 2, 3, 5, 6, 7)], use = "complete.obs")
+print(cor_matrix[1,])
+barplot(cor_matrix[1,-c(1)], las = 2, cex.names = 0.7, main = "Classes to Math proficiency")
+cor_matrix <- cor(mini[,-c(1, 2, 4, 5, 6, 7)], use = "complete.obs")
+print(cor_matrix[1,])
+barplot(cor_matrix[1,-c(1)], las = 2, cex.names = 0.7, main = "Classes to Programming comfort")
+cor_matrix <- cor(mini[,-c(1, 3, 4, 5, 6, 7)], use = "complete.obs")
+print(cor_matrix[1,])
+barplot(cor_matrix[1,-c(1)], las = 2, cex.names = 0.7, main = "Classes to Programming proficiency")
 ```
 
