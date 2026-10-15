@@ -27,12 +27,6 @@ Write a one-paragraph abstract summarizing what you did and your findings. It ne
 
 (Overall goal: explore how proficiency and comfort level in programming/math/stats are associated with other factors and each other)
 
-question 1: Is prior research experience associated with students’ confidence in math, statistics, and programming?
-
-question 2: is proficiency and comfortability in programming, math, statistics correlated
-
-Question 3: Is taking specific upper-division courses associated with students' self-assessed comfort and proficiency in math, statistics, and programming?
-
 ## Data description
 
 The data was collected from a survey given to all students enrolled in PSTAT197A fall 2026. There are a total of 55 responses with no random selection. Demographic information about the respondents is presented as an aggregate summary. 
@@ -55,11 +49,11 @@ For example:
 
 Notice that the questions are precise but not overly technical.
 
-question 1: Is prior research experience associated with students’ confidence in math, statistics, and programming?
+**Questions we will be exploring:**
 
-question 2: is proficiency and comfortability in programming, math, statistics correlated
-
-Question 3: script/eda for question 3, writing report for question 3 with visuals, etc
+1.  **Question 1:** Is prior research experience associated with students’ confidence in math, statistics, and programming?
+2.  **Question 2:** is proficiency and comfortability in programming, math, statistics correlated
+3.  **Question 3:** Is taking specific upper-division courses associated with students' self-assessed comfort and proficiency in math, statistics, and programming?
 
 ## Findings
 
