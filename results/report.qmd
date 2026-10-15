@@ -35,15 +35,11 @@ Question 3: Is taking specific upper-division courses associated with students' 
 
 ## Data description
 
-Write a brief description of the dataset. Your description should cover how data were obtained, sample characteristics, and measurements taken. It does not need to be exhaustive, but sufficiently detailed to convey a clear high-level understanding of the dataset. You can utilize bullet points or tables if you feel it would help improve clarity.
+The data was collected from a survey given to all students enrolled in PSTAT197A fall 2026. There are a total of 55 responses with no random selection. Demographic information about the respondents is presented as an aggregate summary. 
 
-The data was collected from a survey given to all students enrolled in PSTAT197A fall 2026. There are a total of 55 responses with no random selection. Demographic information about the respondents is presented as an aggregate summary. Information about skills, experience, and project preferences was recorded anonymously on an opt-in basis. 51 of the respondents consented to share skills and experience and 49 of the respondents consented to share project preferences.
+Information about skills, experience, and project preferences was recorded anonymously on an opt-in basis. 51 of the respondents consented to share skills and experience and 49 of the respondents consented to share project preferences. 
 
-(describe some of measurements/variables used for questions of interest)
-
-(confidence and proficiency as ordinal variables, research as categorical)
-
-(classes taken as a list)
+Importantly for our analysis, the survey measured confidence and proficiency in math, statistics, and programming as self-reported ordinal variables. It also measured what upper-division courses were taken as a list of options and whether the student had past research experience as a categorical variable.
 
 ## Questions of interest
 
