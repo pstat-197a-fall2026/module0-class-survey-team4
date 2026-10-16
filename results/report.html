@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Emma, Katrina, Kyle, Sou, Tyler, Anika">
-<meta name="dcterms.date" content="2026-10-14">
+<meta name="dcterms.date" content="2026-10-16">
 
 <title>Analysis of class surveys</title>
 <style>
@@ -27,41 +27,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -90,7 +55,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Analysis of class surveys</h1>
-<p class="subtitle lead">If you want a subtitle put it here</p>
 </div>
 
 
@@ -107,7 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Updated</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 14, 2026</p>
+      <p class="date">October 16, 2026</p>
     </div>
   </div>
   
@@ -119,43 +83,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Use this as a template. Keep the headers and remove all other text. Overall, your report may be quite short. When it is complete, render and then push changes to your team repository.</p>
 <section id="executive-summary" class="level2">
 <h2 class="anchored" data-anchor-id="executive-summary">Executive summary</h2>
-<p>Write a one-paragraph abstract summarizing what you did and your findings. It need not be comprehensive; try to highlight the most important or interesting outcomes.</p>
-<p>(Overall goal: explore how proficiency and comfort level in programming/math/stats are associated with other factors and each other)</p>
-<p>question 1: Is prior research experience associated with students’ confidence in math, statistics, and programming?</p>
-<p>question 2: is proficiency and comfortability in programming, math, statistics correlated</p>
-<p>Question 3: Is taking specific upper-division courses associated with students’ self-assessed comfort and proficiency in math, statistics, and programming?</p>
+<p>Our goal was to explore how proficiency and comfort levels in mathematics, statistics, and programming are associated with each other, prior research experience, and upper-division coursework. The data came from a survey taken by students enrolled in PSTAT 197A in Fall 2026. We focused on three questions: first, whether prior research experience was associated with students’ confidence in mathematics, statistics, and programming; second, whether self-assessed proficiency and comfort were related within each of those subjects; and third, whether taking specific upper-division courses was associated with students’ comfort and proficiency in mathematics, statistics, and programming. To summarize, prior research experience showed little association with math or statistics comfort, but students with research experience reported a slightly higher programming comfort. Within each subject, proficiency and comfort were moderately positively correlated, so students who rate themselves more proficient tend to feel more comfortable. Furthermore, coursework mattered the most for programming. PSTAT134 and PSTAT131 were the courses that are most associated with a higher programming comfort, and PSTAT134 was the only individually significant course in the regression models with a p-value of 0.02. Overall, math was the least connected to coursework and the theory heavy courses such as PSTAT160 and PSTAT174 leaned slightly negative for proficiency. Since our sample size is relatively small with a total of 51 students with our data being opt-in and self-reported these findings are just exploratory associations and cannot be generalized.</p>
 </section>
 <section id="data-description" class="level2">
 <h2 class="anchored" data-anchor-id="data-description">Data description</h2>
-<p>Write a brief description of the dataset. Your description should cover how data were obtained, sample characteristics, and measurements taken. It does not need to be exhaustive, but sufficiently detailed to convey a clear high-level understanding of the dataset. You can utilize bullet points or tables if you feel it would help improve clarity.</p>
-<p>The data was collected from a survey given to all students enrolled in PSTAT197A fall 2026. There are a total of 55 responses with no random selection. Demographic information about the respondents is presented as an aggregate summary. Information about skills, experience, and project preferences was recorded anonymously on an opt-in basis. 51 of the respondents consented to share skills and experience and 49 of the respondents consented to share project preferences.</p>
-<p>(describe some of measurements/variables used for questions of interest)</p>
-<p>(confidence and proficiency as ordinal variables, research as categorical)</p>
-<p>(classes taken as a list)</p>
+<p>The data was collected from a survey given to all students enrolled in PSTAT197A fall 2026. There are a total of 55 responses with no random selection. Demographic information about the respondents is presented as an aggregate summary.&nbsp;</p>
+<p>Information about skills, experience, and project preferences was recorded anonymously on an opt-in basis. 51 of the respondents consented to share skills and experience and 49 of the respondents consented to share project preferences.&nbsp;</p>
+<p>Importantly for our analysis, the survey measured confidence and proficiency in math, statistics, and programming as self-reported ordinal variables. It also measured what upper-division courses were taken as a list of options and whether the student had past research experience as a categorical variable.</p>
 </section>
-<section id="questions-of-interest" class="level2">
-<h2 class="anchored" data-anchor-id="questions-of-interest">Questions of interest</h2>
-<p>Indicate the questions your analysis addresses. These should map one-to-one to your findings. Don’t include questions you didn’t answer or questions you started with and refined later. If you would rather frame them as goals or tasks rather than questions that is okay; just modify the header appropriately. However you frame what you’ve done, you may only have two or three items; that is fine. Provide an itemized or numbered list so that the reader can easily identify your objectives.</p>
-<p>For example:</p>
-<blockquote class="blockquote">
-<p><em>We sought to understand the relationship between coursework preparation, self-assessed technical abilities, and comfort level with technical skills. We also sought to understand whether the relationships differed depending on having had prior research experience. Our analysis addressed three questions:</em></p>
+<section id="questions-we-will-be-exploring" class="level2">
+<h2 class="anchored" data-anchor-id="questions-we-will-be-exploring">Questions we will be exploring<strong>:</strong></h2>
 <ol type="1">
-<li><em>How should the coursework histories of students in the class be ordered from less preparation to extensive preparation?</em></li>
-<li><em>Is coursework preparation associated with increased self-assessed technical skill and comfort within the sample?</em></li>
-<li><em>Does prior research experience appear to be a substitute for coursework preparation with respect to self-assessed technical skill and comfort?</em></li>
+<li><strong>Question 1:</strong> Is prior research experience associated with students’ confidence in math, statistics, and programming?</li>
+<li><strong>Question 2:</strong> is proficiency and comfortability in programming, math, statistics correlated</li>
+<li><strong>Question 3:</strong> Is taking specific upper-division courses associated with students’ self-assessed comfort and proficiency in math, statistics, and programming?</li>
 </ol>
-</blockquote>
-<p>Notice that the questions are precise but not overly technical.</p>
-<p>question 1: Is prior research experience associated with students’ confidence in math, statistics, and programming?</p>
-<p>question 2: is proficiency and comfortability in programming, math, statistics correlated</p>
-<p>Question 3: script/eda for question 3, writing report for question 3 with visuals, etc</p>
-</section>
-<section id="findings" class="level2">
-<h2 class="anchored" data-anchor-id="findings">Findings</h2>
-<p>Summarize your results. Don’t try to explain every step you took; focus instead on providing the main data analytic outputs – tables and figures – and explaining clearly what they show. Clarify any important decisions you made in obtaining them. You can display codes if you like but it is not necessary.</p>
 <section id="question-1" class="level3">
 <h3 class="anchored" data-anchor-id="question-1">Question 1</h3>
 <p>The first question was whether or not prior research experience is associated with 197A students’ confidence in math, statistics and programming. To get started with this, we first looked at how people answered the survey question.</p>
@@ -273,6 +217,96 @@ background$research: Yes
 </section>
 <section id="question-2" class="level3">
 <h3 class="anchored" data-anchor-id="question-2">Question 2</h3>
+<p>The second question was whether students’ self-assessed proficiency is correlated with their comfort level in math, statistics, and programming. Following <code>proficiency-vs-comfortability.Rmd</code>, we compared the mean and median comfort scores and the number of students at each proficiency level. We then calculated the correlation within each subject.</p>
+<p>All 51 students who shared background information answered both questions in each subject, so no responses were removed. Proficiency was recorded as beginner (<code>beg</code>), intermediate (<code>int</code>), or advanced (<code>adv</code>) relative to a typical UCSB undergraduate; comfort was recorded on a 1-5 scale.</p>
+<p>We used Spearman’s rank correlation because both measures are ordinal. We ordered proficiency from beginner to advanced so that higher ranks represent greater proficiency. A positive correlation means that students who rate themselves more proficient tend to report greater comfort. Here are our findings.</p>
+<section id="math-1" class="level4">
+<h4 class="anchored" data-anchor-id="math-1">Math</h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  math.prof  mean median count
+  &lt;fct&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;
+1 int        3.6       4    30
+2 adv        4.43      5    21</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="report_files/figure-html/q2-math-plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Looking at the summary statistics and bar plot, students who rated themselves advanced reported greater average math comfort. The 30 intermediate students had a mean comfort score of 3.60 and a median of 4, compared with a mean of 4.43 and a median of 5 for the 21 advanced students. This is a difference of about 0.83 points in average comfort. No students rated themselves beginners in math.</p>
+<p>To measure this pattern, we calculated the rank correlation:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5094326</code></pre>
+</div>
+</div>
+<p>The correlation is moderately positive (rho = 0.509). Higher self-assessed math proficiency generally goes along with greater comfort, but the relationship is not perfect: proficiency and comfort are related rather than interchangeable measures.</p>
+</section>
+<section id="statistics-1" class="level4">
+<h4 class="anchored" data-anchor-id="statistics-1">Statistics</h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  stat.prof  mean median count
+  &lt;fct&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;
+1 int        3.67      4    18
+2 adv        4.39      4    33</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="report_files/figure-html/q2-stat-plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Statistics shows a similar pattern. The 18 intermediate students had a mean comfort score of 3.67, compared with 4.39 for the 33 advanced students, a difference of about 0.73 points. Both groups had a median of 4. This shows why looking at both the mean and median is useful: the average comfort is higher for advanced students even though the middle score is the same. No students rated themselves beginners in statistics. To measure this pattern, we calculated the rank correlation:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4921745</code></pre>
+</div>
+</div>
+<p>The rank correlation is moderately positive (rho = 0.492), slightly smaller than the math correlation. Students who rate themselves more proficient in statistics tend to feel more comfortable with the subject, even though the two groups share the same median comfort score.</p>
+</section>
+<section id="programming-1" class="level4">
+<h4 class="anchored" data-anchor-id="programming-1">Programming</h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  prog.prof  mean median count
+  &lt;fct&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;
+1 beg        3         3     3
+2 int        3.5       3    32
+3 adv        4.25      4    16</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="report_files/figure-html/q2-prog-plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Programming is the only subject with responses at all three proficiency levels. Mean comfort increased from 3.00 for the 3 beginners to 3.50 for the 32 intermediate students and 4.25 for the 16 advanced students. The corresponding medians were 3, 3, and 4. The bar plot shows the same upward pattern as the original script’s grouped bar plot: average comfort rises with proficiency. To measure this pattern, we calculated the rank correlation:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5359967</code></pre>
+</div>
+</div>
+<p>Programming has the largest observed correlation of the three subjects (rho = 0.536), although all three correlations are similar in size. Students who report greater programming proficiency generally also report greater comfort. The beginner group contains only three students, so its summary should be interpreted cautiously.</p>
+<p>Overall, self-assessed proficiency and comfort are moderately positively correlated within all three subjects. The group summaries agree with the script’s main finding: higher proficiency levels have higher average comfort. Math and statistics have similar group means (3.60-4.43 and 3.67-4.39), while programming has a wider range of group means (3.00-4.25). These are ranges of group averages, not ranges of individual students’ comfort scores. The correlations describe associations, not evidence that one measure causes the other. Both measures are self-reported, and the small, opt-in sample from one course limits how broadly we can generalize the findings.</p>
+</section>
 </section>
 <section id="question-3" class="level3">
 <h3 class="anchored" data-anchor-id="question-3">Question 3</h3>
@@ -325,8 +359,8 @@ background$research: Yes
 </div>
 <p>We left out courses that almost everyone in the class has taken (PSTAT 10, 120, 122, 126, and CS 9), since there’s no variation to compare. Proficiency was recorded as beginner/intermediate/advanced, so we encoded these into the numerical values -1, 0 and 1 respectively; comfort was already on a 1-5 scale. (Note: only one student has taken CS 130, so any result for that course is really just one person)</p>
 <p>We then calculated the correlation between taking each course and each of the six comfort/proficiency measures. Here are our findings.</p>
-<section id="statistics-1" class="level4">
-<h4 class="anchored" data-anchor-id="statistics-1">Statistics</h4>
+<section id="statistics-2" class="level4">
+<h4 class="anchored" data-anchor-id="statistics-2">Statistics</h4>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -338,8 +372,8 @@ background$research: Yes
 </div>
 <p>Statistics comfort barely changes with any course; every correlation is below 0.2 in size. Statistics proficiency shows a bit more: students who took PSTAT 131 rate themselves higher (r = 0.31), while students who took CS 16 rate themselves lower (r = -0.31). The more theoretical courses (PSTAT 160, 174, 175) lean slightly negative for both comfort and proficiency, which might mean those courses make students more aware of what they don’t know yet.</p>
 </section>
-<section id="math-1" class="level4">
-<h4 class="anchored" data-anchor-id="math-1">Math</h4>
+<section id="math-2" class="level4">
+<h4 class="anchored" data-anchor-id="math-2">Math</h4>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -351,8 +385,8 @@ background$research: Yes
 </div>
 <p>Math is the least connected to coursework. All correlations are weak, and the only consistent pattern is that the theory-heavy courses (PSTAT 160, 174, 175) are slightly negative for math proficiency, similar to what we saw for statistics.</p>
 </section>
-<section id="programming-1" class="level4">
-<h4 class="anchored" data-anchor-id="programming-1">Programming</h4>
+<section id="programming-2" class="level4">
+<h4 class="anchored" data-anchor-id="programming-2">Programming</h4>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -446,74 +480,10 @@ background$research: Yes
 </section>
 <section id="conclusion" class="level3">
 <h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
-<p>summary of everything, limitations of study (not random, opt in)</p>
-</section>
-</section>
-<section id="useful-tips-remove-this-section" class="level2">
-<h2 class="anchored" data-anchor-id="useful-tips-remove-this-section">Useful tips (remove this section)</h2>
-<p>Due to the visual editor, most common needs for authoring can be met using menu items in the RStudio IDE. For a comprehensive guide to Quarto, see the <a href="https://quarto.org/docs/guide/">documentation</a>; consult the documentation for anything you can’t sort out in the IDE.</p>
-<section id="code-chunks" class="level3">
-<h3 class="anchored" data-anchor-id="code-chunks">Code chunks</h3>
-<p>Insert code chunks using the <em>Insert</em> drop-down menu or <code>ctrl + alt + I</code> . By default in this document, codes will not be shown but results will. If you want to change this behavior, add the chunk option <code>echo: true</code> as below.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">animal =</span> <span class="fu">c</span>(<span class="st">'snake'</span>, <span class="st">'gecko'</span>),</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">threatening =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>))</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>my_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 2
-  animal threatening
-  &lt;chr&gt;  &lt;lgl&gt;      
-1 snake  TRUE       
-2 gecko  FALSE      </code></pre>
-</div>
-</div>
-<p>Code chunks will be executed in order when the document is rendered, so packages should be loaded at the very beginning of the document</p>
-</section>
-<section id="rendering-tables-in-markdown" class="level3">
-<h3 class="anchored" data-anchor-id="rendering-tables-in-markdown">Rendering tables in markdown</h3>
-<p>Several functions exist for converting dataframes to markdown tables for nice display. A simple one from the <code>knitr</code> package is <code>knitr::kable()</code> .</p>
-<div class="cell">
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: left;">animal</th>
-<th style="text-align: left;">threatening</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">snake</td>
-<td style="text-align: left;">TRUE</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">gecko</td>
-<td style="text-align: left;">FALSE</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</section>
-<section id="figures" class="level3">
-<h3 class="anchored" data-anchor-id="figures">Figures</h3>
-<p>To include any figures not generated by code chunks, use <em>Insert &gt; Figure / Image</em> or <code>![CAPTION](path/file.ext)</code> .</p>
-<p>Most of the time code chunks producing plots will render fine. However, to adjust sizing or alignment, use the chunk options <code>fig-width</code> and <code>fig-height</code> . Captions can be added with <code>fig-cap</code> .</p>
-<div class="cell" data-layout-align="left">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-left">
-<figure class="figure">
-<p><img src="report_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="384"></p>
-<figcaption>A terrible plot.</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="links" class="level3">
-<h3 class="anchored" data-anchor-id="links">Links</h3>
-<p>To include any hyperlinks, use <code>[display text](url)</code> .</p>
+<p>The data showed a slight bias towards students with more research experience - generally, we found that the more research experience students had the more comfortable they were among math, statistics and programming. However, we found that prior research experience did not have a strong effect on math confidence - it was distributed evenly among students with and without research experience. Additionally, there was evidence that prior research experience has “virtually” no impact on how confident 197A students feel about statistics. We also concluded that students with prior research experience reported a noticeably higher rank in programming confidence compared to their peers without research experience. Overall, based on the data collected in this question, we can conclude that prior research experience has an expectedly significant impact on comfort level among math, statistics, and programming.</p>
+<p>For question 2, we concluded that self-assessed proficiency and comfort have a moderate positive correlation (rho = 0.509). The data showed that students who rated themselves advanced in math reported greater average math comfort; this makes sense, as the greater skill level implies more comfort. Statistics shows a similar pattern - the more advanced they were in statistics, the more comfortable they were with the subject. Students who reported greater programming proficiency generally also reported greater comfort. Thus, we are able to conclude from the data that self-assessed proficiency and comfort are moderately positively correlated within all three subjects (which matched expected results).</p>
+<p>When assessing proficiency and comfort based on the specific classes students have taken, the results were interesting. Classes such as PSTAT 100, 115, 131, and 134 showed a moderately positive correlation with both statistics proficiency and comfort (PSTAT 134 showed a negative correlation with statistics proficiency). On the other hand, classes like PSTAT 160, 174, and 175, as well as CS 16, show the opposite trend with negative correlation values for statistics proficiency and comfort. This result is a little unexpected, as classes like PSTAT 160 and 174 are more advanced and theoretical statistics courses. For math proficiency, the only two classes that showed a positive correlation were PSTAT 131 and PSTAT 100. All other classes showed a fairly strong negative correlation. For math comfort, however, all classes except PSTAT 100, 115, and 160 showed a negative correlation. For programming proficiency and comfort, PSTAT 131 and 134 showed strong positive correlations, while other classes showed smaller correlations or slightly negative correlations. This pattern falls more in line with what would be expected from the sample since PSTAT 131 and 134 are statistics classes that are more programming-focused. But overall, classes like PSTAT 131 and 134 generally showed a positive correlation to both proficiency and comfort regardless of the area, while classes like 160, 174, and 175, as well as CS 16, often show negative correlation values for the different subjects. However, after assessing each class and its effects on proficiency and comfort through several linear regression models, the results showed that these effects are not particularly significant.</p>
+<p>This is sort of a general trend within the sample as a whole. Unfortunately due to the nature of this survey being quite small and not particularly random, a lot of our findings are more generalizations of trends we found within the data. For future projects seeking to answer such questions using a larger data set is recommended.</p>
 </section>
 </section>
 

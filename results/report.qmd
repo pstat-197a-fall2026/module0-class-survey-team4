@@ -1,6 +1,5 @@
 ---
 title: "Analysis of class surveys"
-subtitle: "If you want a subtitle put it here"
 author: "Emma, Katrina, Kyle, Sou, Tyler, Anika"
 date: last-modified
 published-title: "Updated"
@@ -31,7 +30,7 @@ Information about skills, experience, and project preferences was recorded anony
 
 Importantly for our analysis, the survey measured confidence and proficiency in math, statistics, and programming as self-reported ordinal variables. It also measured what upper-division courses were taken as a list of options and whether the student had past research experience as a categorical variable.
 
-**Questions we will be exploring:**
+## Questions we will be exploring**:**
 
 1.  **Question 1:** Is prior research experience associated with students’ confidence in math, statistics, and programming?
 2.  **Question 2:** is proficiency and comfortability in programming, math, statistics correlated
@@ -119,6 +118,108 @@ wilcox_effsize(background, prog.comf ~ research)
 The effect size is more than twice as large as the one for math. The magnitude is still small, but students with prior research experience report a noticeably higher rank in programming confidence compared to their peers without research experience. This makes sense, as past research experience likely had those students work with code.
 
 ### Question 2
+
+The second question was whether students' self-assessed proficiency is correlated with their comfort level in math, statistics, and programming. Following `proficiency-vs-comfortability.Rmd`, we compared the mean and median comfort scores and the number of students at each proficiency level. We then calculated the correlation within each subject.
+
+```{r q2-data}
+q2 <- read_csv("../data/background-clean.csv", show_col_types = FALSE)
+
+q2$math.prof <- factor(q2$math.prof, levels = c("beg", "int", "adv"))
+q2$stat.prof <- factor(q2$stat.prof, levels = c("beg", "int", "adv"))
+q2$prog.prof <- factor(q2$prog.prof, levels = c("beg", "int", "adv"))
+```
+
+All 51 students who shared background information answered both questions in each subject, so no responses were removed. Proficiency was recorded as beginner (`beg`), intermediate (`int`), or advanced (`adv`) relative to a typical UCSB undergraduate; comfort was recorded on a 1-5 scale.
+
+We used Spearman's rank correlation because both measures are ordinal. We ordered proficiency from beginner to advanced so that higher ranks represent greater proficiency. A positive correlation means that students who rate themselves more proficient tend to report greater comfort. Here are our findings.
+
+#### Math
+
+```{r q2-math-summary}
+math_dist <- q2 %>%
+  group_by(math.prof) %>%
+  summarise(mean = mean(math.comf),
+            median = median(math.comf),
+            count = n()) %>%
+  ungroup()
+
+math_dist
+```
+
+```{r q2-math-plot}
+ggplot(math_dist, aes(x = math.prof, y = mean)) +
+  geom_col(fill = "lightblue") +
+  labs(title = "Mean Math Comfort by Self-Assessed Proficiency",
+       x = "Proficiency", y = "Mean Math Comfort")
+```
+
+Looking at the summary statistics and bar plot, students who rated themselves advanced reported greater average math comfort. The 30 intermediate students had a mean comfort score of 3.60 and a median of 4, compared with a mean of 4.43 and a median of 5 for the 21 advanced students. This is a difference of about 0.83 points in average comfort. No students rated themselves beginners in math.
+
+To measure this pattern, we calculated the rank correlation:
+
+```{r q2-math-correlation}
+cor(as.numeric(q2$math.prof), q2$math.comf, method = "spearman")
+```
+
+The correlation is moderately positive (rho = 0.509). Higher self-assessed math proficiency generally goes along with greater comfort, but the relationship is not perfect: proficiency and comfort are related rather than interchangeable measures.
+
+#### Statistics
+
+```{r q2-stat-summary}
+stats_dist <- q2 %>%
+  group_by(stat.prof) %>%
+  summarise(mean = mean(stat.comf),
+            median = median(stat.comf),
+            count = n()) %>%
+  ungroup()
+
+stats_dist
+```
+
+```{r q2-stat-plot}
+ggplot(stats_dist, aes(x = stat.prof, y = mean)) +
+  geom_col(fill = "lightblue") +
+  labs(title = "Mean Statistics Comfort by Self-Assessed Proficiency",
+       x = "Proficiency", y = "Mean Statistics Comfort")
+```
+
+Statistics shows a similar pattern. The 18 intermediate students had a mean comfort score of 3.67, compared with 4.39 for the 33 advanced students, a difference of about 0.73 points. Both groups had a median of 4. This shows why looking at both the mean and median is useful: the average comfort is higher for advanced students even though the middle score is the same. No students rated themselves beginners in statistics. To measure this pattern, we calculated the rank correlation:
+
+```{r q2-stat-correlation}
+cor(as.numeric(q2$stat.prof), q2$stat.comf, method = "spearman")
+```
+
+The rank correlation is moderately positive (rho = 0.492), slightly smaller than the math correlation. Students who rate themselves more proficient in statistics tend to feel more comfortable with the subject, even though the two groups share the same median comfort score.
+
+#### Programming
+
+```{r q2-prog-summary}
+prog_dist <- q2 %>%
+  group_by(prog.prof) %>%
+  summarise(mean = mean(prog.comf),
+            median = median(prog.comf),
+            count = n()) %>%
+  ungroup()
+
+prog_dist
+```
+
+```{r q2-prog-plot}
+ggplot(prog_dist, aes(x = prog.prof, y = mean)) +
+  geom_col(fill = "lightblue") +
+  labs(title = "Mean Programming Comfort by Self-Assessed Proficiency",
+       x = "Proficiency", y = "Mean Programming Comfort")
+```
+
+Programming is the only subject with responses at all three proficiency levels. Mean comfort increased from 3.00 for the 3 beginners to 3.50 for the 32 intermediate students and 4.25 for the 16 advanced students. The corresponding medians were 3, 3, and 4. The bar plot shows the same upward pattern as the original script's grouped bar plot: average comfort rises with proficiency. To measure this pattern, we calculated the rank correlation:
+
+```{r q2-prog-correlation}
+cor(as.numeric(q2$prog.prof), q2$prog.comf, method = "spearman")
+```
+
+Programming has the largest observed correlation of the three subjects (rho = 0.536), although all three correlations are similar in size. Students who report greater programming proficiency generally also report greater comfort. The beginner group contains only three students, so its summary should be interpreted cautiously.
+
+Overall, self-assessed proficiency and comfort are moderately positively correlated within all three subjects. The group summaries agree with the script's main finding: higher proficiency levels have higher average comfort. Math and statistics have similar group means (3.60-4.43 and 3.67-4.39), while programming has a wider range of group means (3.00-4.25). These are ranges of group averages, not ranges of individual students' comfort scores. The correlations describe associations, not evidence that one measure causes the other. Both measures are self-reported, and the small, opt-in sample from one course limits how broadly we can generalize the findings.
 
 ### Question 3
 
